@@ -6,3 +6,5 @@ print('It will echo back everything you type:')
 while (1):
 	text = input()
 	print(text)
+
+print('Exiting program')
