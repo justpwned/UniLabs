@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab2
 {
-	class Square : Figure
+	public class Square : Figure
 	{
 		private double _a = 1;
 		public double A
@@ -26,6 +26,8 @@ namespace Lab2
 				if (value <= 100) A = Math.Sqrt(value);
 			}
 		}
+
+		public Square() { }
 
 		public Square(double x, double y, double a) : base(x, y)
 		{
@@ -78,7 +80,7 @@ namespace Lab2
 
 		public override string ToString()
 		{
-			return $"Type: Square({X:f2}, {Y:f2}), A = {A:f2}, S = {S:f2}, ZeroIn = {ZeroIn()}";
+			return $"Square x={X:f2} y={Y:f2} a={A:f2} s={S:f2} {(ZeroIn() ? "IN" : "OUT")}";
 		}
 
 		public override bool ZeroIn()

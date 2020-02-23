@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab2
 {
-	class Circle : Figure
+	public class Circle : Figure
 	{
 		private double _r = 1;
 		public double R
@@ -32,6 +32,8 @@ namespace Lab2
 				if (value <= 100) R = CalculateRadius(value);
 			}
 		}
+
+		public Circle() { }
 
 		public Circle(double x, double y, double r = 1) : base(x, y)
 		{
@@ -69,7 +71,7 @@ namespace Lab2
 
 		public override string ToString()
 		{
-			return $"Type: Circle({X:f2}, {Y:f2}), R = {R:f2}, S = {S:f2}, ZeroIn = {ZeroIn()}";
+			return $"Circle x={X:f2} y={Y:f2} r={R:f2} s={S:f2} {(ZeroIn() ? "IN" : "OUT")}";
 		}
 
 		public override bool ZeroIn()

@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Lab2
 {
-	class Point : Figure
+	public class Point : Figure
 	{
 		public override double S
 		{
 			get => 0;
 			set => S = 0;
 		}
+
+		public Point() { }
 
 		public Point(double x, double y) : base(x, y) { }
 
@@ -43,7 +45,7 @@ namespace Lab2
 
 		public override string ToString()
 		{
-			return $"Type: Point({X:f2}, {Y:f2}), S = {S:f2}, ZeroIn = {ZeroIn()}";
+			return $"Point  x={X:f2} y={Y:f2} s={S:f2} {(ZeroIn() ? "IN" : "OUT")}";
 		}
 	}
 }

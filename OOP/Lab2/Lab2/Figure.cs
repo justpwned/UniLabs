@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab2
 {
-	abstract class Figure
+	public abstract class Figure
 	{
 		private double _x;
 		public double X
@@ -27,6 +27,8 @@ namespace Lab2
 				if (Math.Abs(value) <= 8) _y = value;
 			}
 		}
+
+		public Figure() { }
 
 		public Figure(double x, double y)
 		{

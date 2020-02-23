@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2003
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab2", "Lab2\Lab2.csproj", "{56FA9E18-9B7C-48C0-ABAF-0C53732DB28B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab2GUI", "Lab2GUI\Lab2GUI.csproj", "{8073A51A-6B02-4C4C-9DCA-F620744C7D15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{56FA9E18-9B7C-48C0-ABAF-0C53732DB28B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56FA9E18-9B7C-48C0-ABAF-0C53732DB28B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56FA9E18-9B7C-48C0-ABAF-0C53732DB28B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8073A51A-6B02-4C4C-9DCA-F620744C7D15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8073A51A-6B02-4C4C-9DCA-F620744C7D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8073A51A-6B02-4C4C-9DCA-F620744C7D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8073A51A-6B02-4C4C-9DCA-F620744C7D15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
