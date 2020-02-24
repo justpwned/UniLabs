@@ -41,6 +41,7 @@
 			this.crossingTextBox = new System.Windows.Forms.TextBox();
 			this.graphTabPage = new System.Windows.Forms.TabPage();
 			this.graphPictureBox = new System.Windows.Forms.PictureBox();
+			this.moveObjButton = new System.Windows.Forms.Button();
 			this.figuresInfoTab.SuspendLayout();
 			this.commonInfoTabPage.SuspendLayout();
 			this.equalInfoTabPage.SuspendLayout();
@@ -183,16 +184,30 @@
 			this.graphPictureBox.TabIndex = 0;
 			this.graphPictureBox.TabStop = false;
 			// 
+			// moveObjButton
+			// 
+			this.moveObjButton.Enabled = false;
+			this.moveObjButton.Location = new System.Drawing.Point(15, 67);
+			this.moveObjButton.Name = "moveObjButton";
+			this.moveObjButton.Size = new System.Drawing.Size(198, 23);
+			this.moveObjButton.TabIndex = 5;
+			this.moveObjButton.Text = "Передвинуть объекты";
+			this.moveObjButton.UseVisualStyleBackColor = true;
+			this.moveObjButton.Click += new System.EventHandler(this.moveObjButton_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(729, 412);
+			this.Controls.Add(this.moveObjButton);
 			this.Controls.Add(this.figuresInfoTab);
 			this.Controls.Add(this.numObjLabel);
 			this.Controls.Add(this.numObjTextBox);
 			this.Controls.Add(this.createObjButton);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.MaximizeBox = false;
 			this.Name = "MainForm";
 			this.Text = "Бочаров Кирилл. Лабораторная работа №2";
 			this.Load += new System.EventHandler(this.MainForm_Load);
@@ -223,6 +238,7 @@
 		private System.Windows.Forms.PictureBox graphPictureBox;
 		private System.Windows.Forms.TabPage equalInfoTabPage;
 		private System.Windows.Forms.TextBox equalTextBox;
+		private System.Windows.Forms.Button moveObjButton;
 	}
 }
 

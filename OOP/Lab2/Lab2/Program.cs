@@ -19,11 +19,13 @@ namespace Lab2
 
 			figures.ForEach((Figure f) => Console.WriteLine(f));
 
+			Console.WriteLine();
+
 			Console.WriteLine(figures[0].Crossing(figures[1])); // Should be false
 			Console.WriteLine(figures[0].Crossing(figures[2])); // Should be true
 			Console.WriteLine(figures[1].Crossing(figures[2])); // Should be true
 
-			Console.WriteLine("\nSquare-circle intersection tests");
+			Console.WriteLine("\nSquare-circle collision tests");
 			Square s1 = new Square(2, 2, 2);
 			Circle c1 = new Circle(3.5, 3.5, 1.5);
 			Circle c2 = new Circle(3.5, 2, 1);

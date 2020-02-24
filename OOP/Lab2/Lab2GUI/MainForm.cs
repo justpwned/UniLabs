@@ -18,6 +18,9 @@ namespace Lab2GUI
 		private Canvas canvas;
 		private Random rnd = new Random();
 
+		private int spacingLength = 12;
+		private int spacingHeight = 5;
+
 		public MainForm()
 		{
 			InitializeComponent();
@@ -30,6 +33,10 @@ namespace Lab2GUI
 			if (!char.IsDigit(e.KeyChar) || numObjTextBox.Text == "" && e.KeyChar == '0')
 			{
 				e.Handled = true;
+			}
+			if (e.KeyChar == (char)Keys.Enter && numObjTextBox.Text != "")
+			{
+				createObjButton.Focus();
 			}
 		}
 
@@ -58,62 +65,106 @@ namespace Lab2GUI
 			else
 			{
 				canvas.BeginPaint();
-				canvas.DrawCoordinateSystem(canvas.Width / 2, canvas.Height / 2, 20, 5);
+				canvas.DrawCoordinateSystem(canvas.Width / 2, canvas.Height / 2, spacingLength, spacingHeight);
 
+				objListBox.Items.Clear();
 				figures.Clear();
+
+				//figures.Add(new Square(2, 2, 2));
+				//figures.Add(new Circle(3.5, 3.5, 1.5));
+				//figures.Add(new Circle(3.5, 2, 1));
+
+				//figures.Add(new Square(2, 2));
+				//figures.Add(new Circle(4, 3));
+				//figures.Add(new Circle(2, 4, 2));
+
 				for (int i = 0; i < numFigures; ++i)
 				{
-					switch (rnd.Next(2))
+					switch (rnd.Next(3))
 					{
-						case 0: figures.Add(new Lab2.Point()); break;
-						case 1: figures.Add(new Circle()); break;
-						//case 2: figures.Add(new Square()); break;
+						case 0: figures.Add(new Lab2.Point(rnd.Next(17) - 8, rnd.Next(17) - 8)); break;
+						case 1: figures.Add(new Circle(rnd.Next(17) - 8, rnd.Next(17) - 8)); figures[i].S = rnd.Next(1, 101); break;
+						case 2: figures.Add(new Square(rnd.Next(17) - 8, rnd.Next(17) - 8)); figures[i].S = rnd.Next(1, 101); break;
 					}
 					objListBox.Items.Add(string.Format("{0,3} {1} ", i + 1, figures[i]));
-					canvas.DrawFigure(figures[i], canvas.Width / 2, canvas.Height / 2, (i + 1).ToString());
+					canvas.DrawFigure(figures[i], canvas.Width / 2, canvas.Height / 2, spacingLength, (i + 1).ToString());
 				}
 
 				canvas.EndPaint();
+				FillEqualCrossTables();
+				moveObjButton.Enabled = true;
+			}
+		}
 
-				StringBuilder outerEqualSb = new StringBuilder();
-				StringBuilder innerEqualSb = new StringBuilder();
+		private void FillEqualCrossTables()
+		{
+			StringBuilder outerEqualSb = new StringBuilder();
+			StringBuilder innerEqualSb = new StringBuilder();
 
-				StringBuilder outerCrossSb = new StringBuilder();
-				StringBuilder innerCrossSb = new StringBuilder();
+			StringBuilder outerCrossSb = new StringBuilder();
+			StringBuilder innerCrossSb = new StringBuilder();
 
-				innerEqualSb.Append("Equal  ");
-				innerCrossSb.Append("Cross  ");
-				for (int i = 0; i < figures.Count; ++i)
+			innerEqualSb.Append("Equal  ");
+			innerCrossSb.Append("Cross  ");
+			for (int i = 0; i < figures.Count; ++i)
+			{
+				innerEqualSb.Append($"{i + 1,3} ");
+				innerCrossSb.Append($"{i + 1,3} ");
+			}
+			outerEqualSb.AppendLine(innerEqualSb.ToString());
+			outerCrossSb.AppendLine(innerCrossSb.ToString());
+
+			for (int i = 0; i < figures.Count; ++i)
+			{
+				innerEqualSb.Clear();
+				innerCrossSb.Clear();
+				innerEqualSb.Append($"{i + 1,6} ");
+				innerCrossSb.Append($"{i + 1,6} ");
+				for (int j = 0; j < figures.Count; ++j)
 				{
-					innerEqualSb.Append($"{i + 1, 3} ");
-					innerCrossSb.Append($"{i + 1,3} ");
+					innerEqualSb.Append($"{(figures[i].Equal(figures[j]) ? "T" : "F"),3} ");
+					innerCrossSb.Append($"{(figures[i].Crossing(figures[j]) ? "T" : "F"),3} ");
 				}
 				outerEqualSb.AppendLine(innerEqualSb.ToString());
 				outerCrossSb.AppendLine(innerCrossSb.ToString());
-
-				for (int i = 0; i < figures.Count; ++i)
-				{
-					innerEqualSb.Clear();
-					innerCrossSb.Clear();
-					innerEqualSb.Append($"{i + 1,6} ");
-					innerCrossSb.Append($"{i + 1,6} ");
-					for (int j = 0; j < figures.Count; ++j)
-					{
-						innerEqualSb.Append($"{(figures[i].Equal(figures[j]) ? "T" : "F"),3} ");
-						innerCrossSb.Append($"{(figures[i].Crossing(figures[j]) ? "T" : "F"), 3} ");
-					}
-					outerEqualSb.AppendLine(innerEqualSb.ToString());
-					outerCrossSb.AppendLine(innerCrossSb.ToString());
-				}
-
-				equalTextBox.Text = outerEqualSb.ToString();
-				crossingTextBox.Text = outerCrossSb.ToString();
 			}
+
+			equalTextBox.Text = outerEqualSb.ToString();
+			crossingTextBox.Text = outerCrossSb.ToString();
 		}
 
 		private void MainForm_Load(object sender, EventArgs e)
 		{
 			canvas = new Canvas(graphPictureBox);
+		}
+
+		private void moveObjButton_Click(object sender, EventArgs e)
+		{
+			if (figures.Count > 0)
+			{
+				canvas.BeginPaint();
+				canvas.DrawCoordinateSystem(canvas.Width / 2, canvas.Height / 2, spacingLength, spacingHeight);
+
+				for (int i = 0; i < figures.Count; ++i)
+				{
+					figures[i].MoveTo(rnd.Next(10), rnd.Next(10));
+
+					if (figures[i] is Circle)
+					{
+						(figures[i] as Circle).R = rnd.Next(20);
+					}
+					else if (figures[i] is Square)
+					{
+						(figures[i] as Square).A = rnd.Next(15);
+					}
+
+					objListBox.Items[i] = string.Format("{0,3} {1} ", i + 1, figures[i]);
+					canvas.DrawFigure(figures[i], canvas.Width / 2, canvas.Height / 2, spacingLength, (i + 1).ToString());
+				}
+
+				canvas.EndPaint();
+				FillEqualCrossTables();
+			}
 		}
 	}
 }

@@ -34,20 +34,50 @@ namespace Lab2GUI
 			Pb.Image = bitmap;
 		}
 
-		public void DrawFigure(Figure f, int offsetX, int offsetY, string label = "")
+		public void DrawFigure(Figure f, int offsetX, int offsetY, int scale = 1, string label = "")
 		{
 			Graphics g = Graphics.FromImage(bitmap);
+
+			Font font = new Font(FontFamily.GenericMonospace, 10);
+
+			int x = offsetX + (int)(f.X * scale);
+			int y = offsetY - (int)(f.Y * scale);
+
 			if (f is Lab2.Point)
 			{
+				int pointSize = 8;
+				Rectangle rect = new Rectangle(x - pointSize / 2, y - pointSize / 2, pointSize, pointSize);
+				g.FillEllipse(Brushes.Green, rect);
 
+				if (label != "")
+				{
+					g.DrawString(label, font, Brushes.Black, x + pointSize / 2, y - pointSize / 2 - font.Height);
+				}
 			}
 			else if (f is Circle)
 			{
+				Circle circle = f as Circle;
+				double r = circle.R * scale;
+				Rectangle rect = new Rectangle(x - (int)r, y - (int)r, (int)(2 * r), (int)(2 * r));
+				g.DrawEllipse(Pens.Red, rect);
 
+				double labelMargin = Math.Sin(180 / Math.PI * 45) * r;
+				if (label != "")
+				{
+					g.DrawString(label, font, Brushes.Black, (int)(x + labelMargin), (int)(y - labelMargin - font.Height / 2));
+				}
 			}
 			else if (f is Square)
 			{
+				Square square = f as Square;
+				double a = square.A * scale;
+				Rectangle rect = new Rectangle(x - (int)(a / 2), y - (int)(a / 2), (int)a, (int)a);
+				g.DrawRectangle(Pens.Blue, rect);
 
+				if (label != "")
+				{
+					g.DrawString(label, font, Brushes.Black, x + (int)(a / 2), y - (int)(a / 2) - font.Height);
+				}
 			}
 		}
 
@@ -77,10 +107,7 @@ namespace Lab2GUI
 			{
 				posX = centerX + i * spacingLength;
 				g.DrawLine(Pens.Black, posX, posY, posX, negY);
-				
 			}
-			posY = centerY - spacingHeight / 2;
-			negY = centerY + spacingHeight / 2;
 			for (int i = 1; i <= centerX / spacingLength; ++i)
 			{
 				negX = centerX - i * spacingLength;
@@ -96,8 +123,6 @@ namespace Lab2GUI
 				posY = centerY + i * spacingLength;
 				g.DrawLine(Pens.Black, negX, posY, posX, posY);
 			}
-			posX = centerX + spacingHeight / 2;
-			negX = centerX - spacingHeight / 2;
 			for (int i = 1; i <= centerY / spacingLength; ++i)
 			{
 				negY = centerY - i * spacingLength;
