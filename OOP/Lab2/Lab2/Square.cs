@@ -56,7 +56,7 @@ namespace Lab2
 				double y1 = Y + A / 2;
 				double x2 = o.X - o.A / 2;
 				double y2 = o.Y + o.A / 2;
-				return x1 < x2 + o.A && x1 + A > x2 && y1 < y2 + o.A && y1 + o.A > y2;
+				return x1 <= x2 + o.A && x1 + A >= x2 && y1 <= y2 + o.A && y1 + o.A >= y2;
 			}
 
 			return other.Crossing(this);
