@@ -18,10 +18,10 @@ namespace Lab2
 			}
 		}
 
-		// Returns square of circle of a given radius
+		// Returns square of circle with a given radius
 		private double CalculateSquare(double r) => Math.PI * r * r;
 
-		// Returns radius of circle of a given square
+		// Returns radius of circle with a given square
 		private double CalculateRadius(double s) => Math.Sqrt(s / Math.PI);
 		
 		public override double S
