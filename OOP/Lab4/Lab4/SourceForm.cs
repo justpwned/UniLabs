@@ -24,17 +24,60 @@ namespace Lab4
 		private List<ObserverForm> observers = new List<ObserverForm>();
 		private int obsCount;
 
+		public void RemoveObserver(ObserverForm obsObj)
+		{
+			observers.Remove(obsObj);
+			--obsCount;
+
+			if (EventA != null)
+			{
+				foreach (var method in EventA.GetInvocationList())
+				{
+					if (method.Target == obsObj) this.UnRegister("a", obsObj, (Action)method);
+				}
+			}
+
+			if (EventB != null)
+			{
+				foreach (var method in EventB.GetInvocationList())
+				{
+					if (method.Target == obsObj) this.UnRegister("b", obsObj, (Action)method);
+				}
+			}
+
+			if (EventC != null)
+			{
+				foreach (var method in EventC.GetInvocationList())
+				{
+					if (method.Target == obsObj) this.UnRegister("c", obsObj, (Action)method);
+				}
+			}
+
+			tooltip.SetToolTip(addObsBtn, GetObserversInfo());
+		}
+
+		private ToolTip tooltip = new ToolTip();
+
 		public SourceForm()
 		{
 			InitializeComponent();
 		}
 
-		private void ShowInfo()
+		private void ShowInfo(string eventName = "")
 		{
 			eventALbl.Text = $"Подписчиков: {countA}";
 			eventBLbl.Text = $"Подписчиков: {countB}";
 			eventCLbl.Text = $"Подписчиков: {countC}";
 			obsCountLbl.Text = $"Наблюдателей: {obsCount}";
+
+			switch (eventName.ToLower())
+			{
+				case "a": tooltip.SetToolTip(startEventABtn, GetEventInfo(eventName)); break;
+				case "b": tooltip.SetToolTip(startEventBBtn, GetEventInfo(eventName)); break;
+				case "c": tooltip.SetToolTip(startEventCBtn, GetEventInfo(eventName)); break;
+			}
+
+			tooltip.SetToolTip(addObsBtn, GetObserversInfo());
 		}
 
 		private void addObsBtn_Click(object sender, EventArgs e)
@@ -74,9 +117,7 @@ namespace Lab4
 			if (done)
 			{
 				MessageBox.Show($"Объкт {subObj} подписался на событие {eventName}");
-				ShowInfo();
-
-				Delegate[] actions = EventA.GetInvocationList();
+				ShowInfo(eventName);
 			}
 		}
 
@@ -93,28 +134,71 @@ namespace Lab4
 			if (done)
 			{
 				MessageBox.Show($"Объкт {subObj} отписался от события {eventName}");
-				ShowInfo();
+				ShowInfo(eventName);
 			}
 		}
 
 		private string GetEventInfo(string eventName)
 		{
-			//switch (eventName.ToLower())
-			//{
+			StringBuilder sb = new StringBuilder();
 
-			//}
-			
-			return "test";
+			Delegate[] invocationList = null;
+			switch (eventName.ToLower())
+			{
+				case "a": invocationList = EventA?.GetInvocationList(); break;
+				case "b": invocationList = EventB?.GetInvocationList(); break;
+				case "c": invocationList = EventC?.GetInvocationList(); break;
+			}
+
+			if (invocationList != null)
+			{
+				foreach (var method in invocationList)
+				{
+					sb.AppendLine($"{(method.Target as Form).Text} - {method.Method}");
+				}
+			}
+
+			return sb.ToString();
 		}
 
-		private void SourceForm_Load(object sender, EventArgs e)
+		private string GetObserversInfo()
 		{
-			
+			StringBuilder sb = new StringBuilder();
 
-			ToolTip tooltip = new ToolTip();
-			tooltip.SetToolTip(startEventABtn, GetEventInfo("A"));
-			tooltip.SetToolTip(startEventBBtn, GetEventInfo("B"));
-			tooltip.SetToolTip(startEventCBtn, GetEventInfo("C"));
+			foreach (var obs in observers)
+			{
+				sb.Append(obs.Text + " - ");
+
+				int subCount = 0;
+
+				if (EventA != null)
+				{
+					foreach (var method in EventA.GetInvocationList())
+					{
+						if (method.Target as ObserverForm == obs) ++subCount;
+					}
+				}
+
+				if (EventB != null)
+				{
+					foreach (var method in EventB.GetInvocationList())
+					{
+						if (method.Target as ObserverForm == obs) ++subCount;
+					}
+				}
+
+				if (EventC != null)
+				{
+					foreach (var method in EventC.GetInvocationList())
+					{
+						if (method.Target as ObserverForm == obs) ++subCount;
+					}
+				}
+
+				sb.AppendLine(subCount.ToString());
+			}
+
+			return sb.ToString();
 		}
 	}
 }

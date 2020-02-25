@@ -30,12 +30,12 @@
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ObserverForm));
 			this.controlPanelGrpBox = new System.Windows.Forms.GroupBox();
-			this.eventARadioBtn = new System.Windows.Forms.RadioButton();
-			this.eventBRadioBtn = new System.Windows.Forms.RadioButton();
+			this.eventCRadioBtn = new System.Windows.Forms.RadioButton();
 			this.eventListBox = new System.Windows.Forms.ListBox();
+			this.eventBRadioBtn = new System.Windows.Forms.RadioButton();
+			this.eventARadioBtn = new System.Windows.Forms.RadioButton();
 			this.subBtn = new System.Windows.Forms.Button();
 			this.unsubBtn = new System.Windows.Forms.Button();
-			this.eventCRadioBtn = new System.Windows.Forms.RadioButton();
 			this.controlPanelGrpBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -52,27 +52,16 @@
 			this.controlPanelGrpBox.TabStop = false;
 			this.controlPanelGrpBox.Text = "Панель управления";
 			// 
-			// eventARadioBtn
+			// eventCRadioBtn
 			// 
-			this.eventARadioBtn.AutoSize = true;
-			this.eventARadioBtn.Location = new System.Drawing.Point(16, 20);
-			this.eventARadioBtn.Name = "eventARadioBtn";
-			this.eventARadioBtn.Size = new System.Drawing.Size(79, 17);
-			this.eventARadioBtn.TabIndex = 0;
-			this.eventARadioBtn.TabStop = true;
-			this.eventARadioBtn.Text = "Событие А";
-			this.eventARadioBtn.UseVisualStyleBackColor = true;
-			// 
-			// eventBRadioBtn
-			// 
-			this.eventBRadioBtn.AutoSize = true;
-			this.eventBRadioBtn.Location = new System.Drawing.Point(147, 19);
-			this.eventBRadioBtn.Name = "eventBRadioBtn";
-			this.eventBRadioBtn.Size = new System.Drawing.Size(79, 17);
-			this.eventBRadioBtn.TabIndex = 1;
-			this.eventBRadioBtn.TabStop = true;
-			this.eventBRadioBtn.Text = "Событие B";
-			this.eventBRadioBtn.UseVisualStyleBackColor = true;
+			this.eventCRadioBtn.AutoSize = true;
+			this.eventCRadioBtn.Location = new System.Drawing.Point(16, 43);
+			this.eventCRadioBtn.Name = "eventCRadioBtn";
+			this.eventCRadioBtn.Size = new System.Drawing.Size(79, 17);
+			this.eventCRadioBtn.TabIndex = 3;
+			this.eventCRadioBtn.TabStop = true;
+			this.eventCRadioBtn.Text = "Событие C";
+			this.eventCRadioBtn.UseVisualStyleBackColor = true;
 			// 
 			// eventListBox
 			// 
@@ -86,6 +75,28 @@
 			this.eventListBox.Name = "eventListBox";
 			this.eventListBox.Size = new System.Drawing.Size(210, 121);
 			this.eventListBox.TabIndex = 2;
+			// 
+			// eventBRadioBtn
+			// 
+			this.eventBRadioBtn.AutoSize = true;
+			this.eventBRadioBtn.Location = new System.Drawing.Point(147, 19);
+			this.eventBRadioBtn.Name = "eventBRadioBtn";
+			this.eventBRadioBtn.Size = new System.Drawing.Size(79, 17);
+			this.eventBRadioBtn.TabIndex = 1;
+			this.eventBRadioBtn.TabStop = true;
+			this.eventBRadioBtn.Text = "Событие B";
+			this.eventBRadioBtn.UseVisualStyleBackColor = true;
+			// 
+			// eventARadioBtn
+			// 
+			this.eventARadioBtn.AutoSize = true;
+			this.eventARadioBtn.Location = new System.Drawing.Point(16, 20);
+			this.eventARadioBtn.Name = "eventARadioBtn";
+			this.eventARadioBtn.Size = new System.Drawing.Size(79, 17);
+			this.eventARadioBtn.TabIndex = 0;
+			this.eventARadioBtn.TabStop = true;
+			this.eventARadioBtn.Text = "Событие А";
+			this.eventARadioBtn.UseVisualStyleBackColor = true;
 			// 
 			// subBtn
 			// 
@@ -107,17 +118,6 @@
 			this.unsubBtn.UseVisualStyleBackColor = true;
 			this.unsubBtn.Click += new System.EventHandler(this.unsubBtn_Click);
 			// 
-			// eventCRadioBtn
-			// 
-			this.eventCRadioBtn.AutoSize = true;
-			this.eventCRadioBtn.Location = new System.Drawing.Point(16, 43);
-			this.eventCRadioBtn.Name = "eventCRadioBtn";
-			this.eventCRadioBtn.Size = new System.Drawing.Size(79, 17);
-			this.eventCRadioBtn.TabIndex = 3;
-			this.eventCRadioBtn.TabStop = true;
-			this.eventCRadioBtn.Text = "Событие C";
-			this.eventCRadioBtn.UseVisualStyleBackColor = true;
-			// 
 			// ObserverForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -131,6 +131,7 @@
 			this.MaximizeBox = false;
 			this.Name = "ObserverForm";
 			this.Text = "Наблюдатель";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ObserverForm_FormClosing);
 			this.controlPanelGrpBox.ResumeLayout(false);
 			this.controlPanelGrpBox.PerformLayout();
 			this.ResumeLayout(false);

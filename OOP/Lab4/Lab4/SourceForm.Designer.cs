@@ -133,7 +133,6 @@
 			this.MaximizeBox = false;
 			this.Name = "SourceForm";
 			this.Text = "Источник";
-			this.Load += new System.EventHandler(this.SourceForm_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

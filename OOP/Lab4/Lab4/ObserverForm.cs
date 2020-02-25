@@ -90,5 +90,10 @@ namespace Lab4
 
 			if (action != null) srcForm.UnRegister(eventName, this, action);
 		}
+
+		private void ObserverForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			srcForm.RemoveObserver(this);
+		}
 	}
 }
