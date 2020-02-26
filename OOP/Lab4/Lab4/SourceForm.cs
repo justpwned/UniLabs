@@ -12,65 +12,55 @@ namespace Lab4
 {
 	public partial class SourceForm : Form
 	{
-		public Action EventA;
-		private int countA;
+		class Event
+		{
+			public Action Methods { get; set; }
+			public int NumMethods { get; set; }
+		};
 
-		public Action EventB;
-		private int countB;
-
-		public Action EventC;
-		private int countC;
+		private Dictionary<string, Event> events = new Dictionary<string, Event>();
 
 		private List<ObserverForm> observers = new List<ObserverForm>();
 		private int obsCount;
-
-		public void RemoveObserver(ObserverForm obsObj)
-		{
-			observers.Remove(obsObj);
-			--obsCount;
-
-			if (EventA != null)
-			{
-				foreach (var method in EventA.GetInvocationList())
-				{
-					if (method.Target == obsObj) this.UnRegister("a", obsObj, (Action)method);
-				}
-			}
-
-			if (EventB != null)
-			{
-				foreach (var method in EventB.GetInvocationList())
-				{
-					if (method.Target == obsObj) this.UnRegister("b", obsObj, (Action)method);
-				}
-			}
-
-			if (EventC != null)
-			{
-				foreach (var method in EventC.GetInvocationList())
-				{
-					if (method.Target == obsObj) this.UnRegister("c", obsObj, (Action)method);
-				}
-			}
-
-			tooltip.SetToolTip(addObsBtn, GetObserversInfo());
-		}
 
 		private ToolTip tooltip = new ToolTip();
 
 		public SourceForm()
 		{
 			InitializeComponent();
+
+			events.Add("A", new Event());
+			events.Add("B", new Event());
+			events.Add("C", new Event());
+		}
+
+		public void RemoveObserver(ObserverForm obsObj)
+		{
+			observers.Remove(obsObj);
+			--obsCount;
+
+			foreach (var e in events)
+			{
+				if (e.Value.Methods != null)
+				{
+					foreach (var method in e.Value.Methods.GetInvocationList())
+					{
+						if (method.Target == obsObj) this.UnRegister(e.Key, obsObj, (Action)method);
+					}
+				}
+			}
+
+			tooltip.SetToolTip(addObsBtn, GetObserversInfo());
 		}
 
 		private void ShowInfo(string eventName = "")
 		{
-			eventALbl.Text = $"Подписчиков: {countA}";
-			eventBLbl.Text = $"Подписчиков: {countB}";
-			eventCLbl.Text = $"Подписчиков: {countC}";
+			eventALbl.Text = $"Подписчиков: {events["A"].NumMethods}";
+			eventBLbl.Text = $"Подписчиков: {events["B"].NumMethods}";
+			eventCLbl.Text = $"Подписчиков: {events["C"].NumMethods}";
 			obsCountLbl.Text = $"Наблюдателей: {obsCount}";
 
-			switch (eventName.ToLower())
+			switch (eventName)
 			{
 				case "a": tooltip.SetToolTip(startEventABtn, GetEventInfo(eventName)); break;
 				case "b": tooltip.SetToolTip(startEventBBtn, GetEventInfo(eventName)); break;
@@ -91,27 +81,28 @@ namespace Lab4
 
 		private void startEventABtn_Click(object sender, EventArgs e)
 		{
-			EventA?.Invoke();
+			events["A"].Methods?.Invoke();
 		}
 
 		private void startEventBBtn_Click(object sender, EventArgs e)
 		{
-			EventB?.Invoke();
+			events["B"].Methods?.Invoke();
 		}
 
 		private void startEventCBtn_Click(object sender, EventArgs e)
 		{
-			EventC?.Invoke();
+			events["C"].Methods?.Invoke();
 		}
 
 		public void Register(string eventName, object subObj, Action method)
 		{
 			bool done = false;
-			switch (eventName.ToLower())
+
+			if (events.ContainsKey(eventName))
 			{
-				case "a": EventA += method; ++countA; done = true; break;
-				case "b": EventB += method; ++countB; done = true; break;
-				case "c": EventC += method; ++countC; done = true; break;
+				done = true;
+				events[eventName].Methods += method;
+				events[eventName].NumMethods++;
 			}
 
 			if (done)
@@ -124,11 +115,12 @@ namespace Lab4
 		public void UnRegister(string eventName, object subObj, Action method)
 		{
 			bool done = false;
-			switch (eventName.ToLower())
+
+			if (events.ContainsKey(eventName))
 			{
-				case "a": EventA -= method; --countA; done = true; break;
-				case "b": EventB -= method; --countB; done = true; break;
-				case "c": EventC -= method; --countC; done = true; break;
+				done = true;
+				events[eventName].Methods -= method;
+				events[eventName].NumMethods--;
 			}
 
 			if (done)
@@ -143,11 +135,9 @@ namespace Lab4
 			StringBuilder sb = new StringBuilder();
 
 			Delegate[] invocationList = null;
-			switch (eventName.ToLower())
+			if (events.ContainsKey(eventName))
 			{
-				case "a": invocationList = EventA?.GetInvocationList(); break;
-				case "b": invocationList = EventB?.GetInvocationList(); break;
-				case "c": invocationList = EventC?.GetInvocationList(); break;
+				invocationList = events[eventName].Methods?.GetInvocationList();
 			}
 
 			if (invocationList != null)
@@ -171,27 +161,14 @@ namespace Lab4
 
 				int subCount = 0;
 
-				if (EventA != null)
+				foreach (var e in events)
 				{
-					foreach (var method in EventA.GetInvocationList())
+					if (e.Value.Methods != null)
 					{
-						if (method.Target as ObserverForm == obs) ++subCount;
-					}
-				}
-
-				if (EventB != null)
-				{
-					foreach (var method in EventB.GetInvocationList())
-					{
-						if (method.Target as ObserverForm == obs) ++subCount;
-					}
-				}
-
-				if (EventC != null)
-				{
-					foreach (var method in EventC.GetInvocationList())
-					{
-						if (method.Target as ObserverForm == obs) ++subCount;
+						foreach (var method in e.Value.Methods.GetInvocationList())
+						{
+							if (method.Target as ObserverForm == obs) ++subCount;
+						}
 					}
 				}
 
