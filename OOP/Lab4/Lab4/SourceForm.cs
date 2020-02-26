@@ -29,9 +29,14 @@ namespace Lab4
 		{
 			InitializeComponent();
 
-			events.Add("A", new Event());
-			events.Add("B", new Event());
-			events.Add("C", new Event());
+			AddEvent("A");
+			AddEvent("B");
+			AddEvent("C");
+		}
+		
+		public void AddEvent(string eventName)
+		{
+			events.Add(eventName, new Event());
 		}
 
 		public void RemoveObserver(ObserverForm obsObj)
