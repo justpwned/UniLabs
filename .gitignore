@@ -34,3 +34,6 @@ bld/
 [Ll]og/
 [Ll]ogs/
 .vs
+
+# Python stuff
+__pycache__
