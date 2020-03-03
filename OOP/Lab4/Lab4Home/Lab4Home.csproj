@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A19F5FC1-B081-4890-A39E-FF76CEE458FA}</ProjectGuid>
+    <ProjectGuid>{DE1C9576-321A-4206-9FF3-444295CCC35E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Lab4Home</RootNamespace>
     <AssemblyName>Lab4Home</AssemblyName>
@@ -46,14 +46,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Magazine.cs" />
+    <Compile Include="NewPubForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="NewPubForm.Designer.cs">
+      <DependentUpon>NewPubForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Newspaper.cs" />
+    <Compile Include="Publication.cs" />
+    <Compile Include="PublisherForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PublisherForm.Designer.cs">
+      <DependentUpon>PublisherForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="NewPubForm.resx">
+      <DependentUpon>NewPubForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PublisherForm.resx">
+      <DependentUpon>PublisherForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
