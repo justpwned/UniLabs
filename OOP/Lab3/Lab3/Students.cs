@@ -57,7 +57,7 @@ namespace Lab3
 				case 4: course = "четвертом"; break;
 			}
 			
-			return $"{s.Surname} обучается на {course} курсе направления {s.Spec}.";
+			return $"{s.Surname} {s.Name} обучается на {course} курсе направления {s.Spec}.";
 		}
 
 		public static void PrintStuds(string st, FormatRule Fmt)

@@ -56,6 +56,7 @@ namespace Lab4
 			}
 
 			tooltip.SetToolTip(addObsBtn, GetObserversInfo());
+			ShowInfo();
 		}
 
 		private void ShowInfo(string eventName = "")
@@ -67,9 +68,9 @@ namespace Lab4
 
 			switch (eventName)
 			{
-				case "a": tooltip.SetToolTip(startEventABtn, GetEventInfo(eventName)); break;
-				case "b": tooltip.SetToolTip(startEventBBtn, GetEventInfo(eventName)); break;
-				case "c": tooltip.SetToolTip(startEventCBtn, GetEventInfo(eventName)); break;
+				case "A": tooltip.SetToolTip(startEventABtn, GetEventInfo(eventName)); break;
+				case "B": tooltip.SetToolTip(startEventBBtn, GetEventInfo(eventName)); break;
+				case "C": tooltip.SetToolTip(startEventCBtn, GetEventInfo(eventName)); break;
 			}
 
 			tooltip.SetToolTip(addObsBtn, GetObserversInfo());
@@ -123,13 +124,25 @@ namespace Lab4
 
 			if (events.ContainsKey(eventName))
 			{
-				done = true;
-				events[eventName].Methods -= method;
-				events[eventName].NumMethods--;
+				done = false;
+
+				if (events[eventName].Methods != null)
+				{
+					foreach (var i in events[eventName].Methods.GetInvocationList())
+					{
+						if ((Delegate)method == i)
+						{
+							done = true;
+							break;
+						}
+					}
+				}
 			}
 
 			if (done)
 			{
+				events[eventName].Methods -= method;
+				events[eventName].NumMethods--;
 				MessageBox.Show($"Объкт {subObj} отписался от события {eventName}");
 				ShowInfo(eventName);
 			}
