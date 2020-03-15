@@ -106,9 +106,12 @@
 			this.Controls.Add(this.pubNameLabel);
 			this.Controls.Add(this.pubNameTextBox);
 			this.Controls.Add(this.pubTypeGroupBox);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.MaximizeBox = false;
 			this.Name = "NewPubForm";
 			this.Text = "Открытие нового издания";
+			this.Load += new System.EventHandler(this.NewPubForm_Load);
 			this.pubTypeGroupBox.ResumeLayout(false);
 			this.pubTypeGroupBox.PerformLayout();
 			this.ResumeLayout(false);

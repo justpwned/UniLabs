@@ -8,13 +8,18 @@ namespace Lab4Home
 {
 	public class Newspaper : Publication
 	{
-		public Newspaper(uint num, string name) : base(num, name)
+		public Newspaper(string name) : base(name)
 		{
+		}
+
+		public override void SetNextPublishDate()
+		{
+			NextPublishDate = NextPublishDate.AddDays(1);
 		}
 
 		public override string ToString()
 		{
-			return $"Газета «{Name}» №{Num}";
+			return $"Газета «{Name}»";
 		}
 	}
 }

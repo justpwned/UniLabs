@@ -46,27 +46,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Magazine.cs" />
-    <Compile Include="NewPubForm.cs">
+    <Compile Include="EventSystem.cs" />
+    <Compile Include="Forms\InfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewPubForm.Designer.cs">
+    <Compile Include="Forms\InfoForm.Designer.cs">
+      <DependentUpon>InfoForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Magazine.cs" />
+    <Compile Include="Forms\NewPubForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NewPubForm.Designer.cs">
       <DependentUpon>NewPubForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Newspaper.cs" />
-    <Compile Include="Publication.cs" />
-    <Compile Include="PublisherForm.cs">
+    <Compile Include="Forms\NewSubForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PublisherForm.Designer.cs">
+    <Compile Include="Forms\NewSubForm.Designer.cs">
+      <DependentUpon>NewSubForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Publication.cs" />
+    <Compile Include="Forms\PublisherForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PublisherForm.Designer.cs">
       <DependentUpon>PublisherForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="NewPubForm.resx">
-      <DependentUpon>NewPubForm.cs</DependentUpon>
+    <Compile Include="Subscriber.cs" />
+    <Compile Include="Forms\SubscriberForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SubscriberForm.Designer.cs">
+      <DependentUpon>SubscriberForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\InfoForm.resx">
+      <DependentUpon>InfoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PublisherForm.resx">
+    <EmbeddedResource Include="Forms\NewPubForm.resx">
+      <DependentUpon>NewPubForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NewSubForm.resx">
+      <DependentUpon>NewSubForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PublisherForm.resx">
       <DependentUpon>PublisherForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -78,6 +106,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\SubscriberForm.resx">
+      <DependentUpon>SubscriberForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -12,31 +12,41 @@ namespace Lab4Home
 {
 	public partial class NewPubForm : Form
 	{
-		public NewPubForm()
+		private PublisherForm parent { get; }
+
+		public NewPubForm(PublisherForm parent)
 		{
 			InitializeComponent();
+			this.parent = parent;
 		}
 
 		private void publishButton_Click(object sender, EventArgs e)
 		{
 			string pubname = pubNameTextBox.Text.Trim();
-			if (!(Parent as PublisherForm).ContainsPublication(pubname))
+			if (!parent.ContainsPublication(pubname))
 			{
 				Publication pub = null;
 				if (magazineRadioButton.Checked)
 				{
-					pub = new Magazine(1, pubname);
+					pub = new Magazine(pubname);
 				}
 				else
 				{
-					pub = new Newspaper(1, pubname);
+					pub = new Newspaper(pubname);
 				}
-				(Parent as PublisherForm).AddNewPublication(pub);
+				parent.AddNewPublication(pub);
+				this.Close();
 			}
 			else
 			{
 				MessageBox.Show($"Название «{pubname}» не уникально!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 			}
+		}
+
+		private void NewPubForm_Load(object sender, EventArgs e)
+		{
+			this.ActiveControl = pubNameTextBox;
+			newsRadioButton.Checked = true;
 		}
 	}
 }

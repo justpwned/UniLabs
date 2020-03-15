@@ -70,7 +70,8 @@ namespace Lab2GUI
 				objListBox.Items.Clear();
 				figures.Clear();
 
-				//figures.Add(new Square(2, 2, 2));
+				figures.Add(new Square(4, 4, 3));
+				figures.Add(new Square(3, 6, 2));
 				//figures.Add(new Circle(3.5, 3.5, 1.5));
 				//figures.Add(new Circle(3.5, 2, 1));
 
@@ -80,12 +81,12 @@ namespace Lab2GUI
 
 				for (int i = 0; i < numFigures; ++i)
 				{
-					switch (rnd.Next(3))
-					{
-						case 0: figures.Add(new Lab2.Point(rnd.Next(17) - 8, rnd.Next(17) - 8)); break;
-						case 1: figures.Add(new Circle(rnd.Next(17) - 8, rnd.Next(17) - 8)); figures[i].S = rnd.Next(1, 101); break;
-						case 2: figures.Add(new Square(rnd.Next(17) - 8, rnd.Next(17) - 8)); figures[i].S = rnd.Next(1, 101); break;
-					}
+					//switch (rnd.Next(3))
+					//{
+					//	case 0: figures.Add(new Lab2.Point(rnd.Next(17) - 8, rnd.Next(17) - 8)); break;
+					//	case 1: figures.Add(new Circle(rnd.Next(17) - 8, rnd.Next(17) - 8)); figures[i].S = rnd.Next(1, 101); break;
+					//	case 2: figures.Add(new Square(rnd.Next(17) - 8, rnd.Next(17) - 8)); figures[i].S = rnd.Next(1, 101); break;
+					//}
 					objListBox.Items.Add(string.Format("{0,3} {1} ", i + 1, figures[i]));
 					canvas.DrawFigure(figures[i], canvas.Width / 2, canvas.Height / 2, spacingLength, (i + 1).ToString());
 				}

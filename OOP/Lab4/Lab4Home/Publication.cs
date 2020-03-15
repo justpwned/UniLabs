@@ -6,22 +6,32 @@ using System.Threading.Tasks;
 
 namespace Lab4Home
 {
-	public abstract class Publication : IEquatable<Publication>
+	public abstract class Publication
 	{
-		public uint Num { get; set; }
+		public int Num { get; set; }
 		public string Name { get; set; }
+		public bool IsPublishing { get; set; }
+		public DateTime InceptionDate { get; set; }
+		public DateTime NextPublishDate { get; set; }
+		public List<Subscriber> Subscribers { get; } = new List<Subscriber>();
 
-		public Publication(uint num, string name)
+		public Publication(string name)
 		{
-			Num = num;
+			Num = 1;
 			Name = name;
+			IsPublishing = true;
+			InceptionDate = PublisherForm.gDateTime;
+			NextPublishDate = InceptionDate;
 		}
 
-		public bool Equals(Publication other)
+		public bool IsTimeToPublish(DateTime currentTime)
 		{
-			return Name == other.Name;
+			return NextPublishDate.Day   == currentTime.Day &&
+				   NextPublishDate.Month == currentTime.Month &&
+				   NextPublishDate.Year  == currentTime.Year;
 		}
 
+		public abstract void SetNextPublishDate();
 		public abstract override string ToString();
 	}
 }
