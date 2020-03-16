@@ -193,6 +193,7 @@ namespace Lab4Home
 
 		private void dayTimer_Tick(object sender, EventArgs e)
 		{
+			infoForm.RefreshInfo();
 			foreach (Publication pub in pubListBox.Items)
 			{
 				if (pub.IsPublishing && pub.IsTimeToPublish(gDateTime))
@@ -214,7 +215,6 @@ namespace Lab4Home
 				}
 			}
 
-			infoForm.RefreshInfo();
 			gDateTime = gDateTime.AddDays(1);
 		}
 
@@ -227,17 +227,19 @@ namespace Lab4Home
 		{
 			gDateTime = DateTime.Now;
 			infoForm = new Forms.InfoForm(this);
-			infoForm.RefreshInfo();
 		}
 
 		private void PublisherForm_MouseDown(object sender, MouseEventArgs e)
 		{
 			if (e.Button == MouseButtons.Left)
 			{
-				if (!infoForm.Visible)
+				if (infoForm.IsDisposed)
 				{
-					infoForm.Show();
+					infoForm = new Forms.InfoForm(this);
 				}
+
+				infoForm.Show();
+				infoForm.RefreshInfo();
 			}
 		}
 	}

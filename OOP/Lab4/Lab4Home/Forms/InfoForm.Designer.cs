@@ -45,7 +45,7 @@
 			// subListBox
 			// 
 			this.subListBox.FormattingEnabled = true;
-			this.subListBox.Location = new System.Drawing.Point(412, 45);
+			this.subListBox.Location = new System.Drawing.Point(376, 45);
 			this.subListBox.Name = "subListBox";
 			this.subListBox.Size = new System.Drawing.Size(201, 225);
 			this.subListBox.TabIndex = 8;
@@ -140,7 +140,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(624, 283);
+			this.ClientSize = new System.Drawing.Size(595, 283);
 			this.Controls.Add(this.pubTypeLabel);
 			this.Controls.Add(this.label5);
 			this.Controls.Add(this.inceptionDateLabel);
